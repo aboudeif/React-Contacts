@@ -4,10 +4,10 @@ import ContactsList from "./ContactsList";
 
 const App = () => {
   const removeContact = (contact) => {
-    setContacts(contacts.filter(c => c.id !== contact.id))
-  }
-
-  const [contacts,setContacts] = useState(
+    setContacts(contacts.filter((c) => c.id !== contact.id));
+  };
+  
+  const [contacts, setContacts] = useState(
     [
       {
         id: "karen",
@@ -32,9 +32,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <ContactsList contacts={contacts} onRemoveContact={removeContact} />
+      <ContactsList
+        contacts={contacts}
+        onRemoveContact={removeContact}
+      />
     </div>
-  )
+  );
 };
 
 export default App;

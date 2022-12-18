@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "../css/App.css";
 import ContactsList from "./ContactsList";
+import CreatContact from "./CreatContact";
 
 const App = () => {
   const removeContact = (contact) => {
     setContacts(contacts.filter((c) => c.id !== contact.id));
   };
-  
+
   const [contacts, setContacts] = useState(
     [
       {
@@ -31,12 +33,16 @@ const App = () => {
   );
 
   return (
-    <div className="App">
+    
+      <Routes>
+      <Route exact path="/" element={
       <ContactsList
         contacts={contacts}
         onRemoveContact={removeContact}
-      />
-    </div>
+      />} />
+      <Route exact path="/create" element={ <CreatContact />} />
+      </Routes>
+
   );
 };
 

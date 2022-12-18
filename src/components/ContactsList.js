@@ -1,15 +1,21 @@
 import { useState } from "react";
 import Contact from "./Contact";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ContactsList = ({ contacts, onRemoveContact, search }) => {
-
   const [query, setQuery] = useState("");
 
   const showContacts =
-      query === "" ? contacts : contacts.filter((c) =>
-      c.name.toLowerCase().includes(query.toLowerCase()));
+    query === ""
+      ? contacts
+      : contacts.filter((c) =>
+          c.name.toLowerCase().includes(query.toLowerCase())
+        );
 
+  const updateQuery = (update) => setQuery(update);
+
+  const clearQuery = () => updateQuery("");
 
   return (
     <div className="contact-list">
@@ -20,16 +26,24 @@ const ContactsList = ({ contacts, onRemoveContact, search }) => {
           value={query}
           placeholder="Search contacts"
           onChange={(event) => {
-            setQuery(event.target.value);
+            updateQuery(event.target.value);
           }}
         />
-        
-        
+        <Link to="/create" className="add-contact">add contact</Link>
       </div>
       <ul className="list-contacts">
-      <span className="contact-count">
-          {showContacts.length} {showContacts.length === 1 ? "contact" : "contacts"} {showContacts.length === 1 ? "matchs" : "match"} your search
-        </span>
+        {query ? (
+          <div className="showing-contacts">
+            <span className="contact-count">
+              {showContacts.length}{" "}
+              {showContacts.length <= 1 ? "contact" : "contacts"} of{" "}
+              {contacts.length}
+            </span>{" "}
+            <button onClick={clearQuery}>
+              Show all
+            </button>
+          </div>
+        ) : null}
         {showContacts.map((contact) => (
           <Contact
             key={contact.id}

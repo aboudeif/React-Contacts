@@ -191,3 +191,11 @@ body,
   cursor: pointer;
   outline: none;
 }
+
+.mybtn {
+  color: blue;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+}
